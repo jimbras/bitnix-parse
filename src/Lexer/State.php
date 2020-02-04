@@ -15,50 +15,23 @@
  *  along with this program. If not, see <https://www.gnu.org/licenses/agpl-3.0.txt>.
  */
 
-namespace Bitnix\Parse;
+namespace Bitnix\Parse\Lexer;
+
+use RuntimeException,
+    Bitnix\Parse\Token;
 
 /**
  * @version 0.1.0
  */
-final class Token {
+interface State {
 
     /**
-     * @var string
+     * @param Shifter $shifter
+     * @param string $buffer
+     * @param int $offset
+     * @return null|Token
+     * @throws RuntimeException
      */
-    private string $type;
+    public function token(Shifter $shifter, string $buffer, int $offset) : ?Token;
 
-    /**
-     * @var string
-     */
-    private ?string $lexeme = null;
-
-    /**
-     * @param string $type
-     * @param string $lexeme
-     */
-    public function __construct(string $type, string $lexeme = '') {
-        $this->type = $type;
-        $this->lexeme = $lexeme;
-    }
-
-    /**
-     * @return string
-     */
-    public function type() : string {
-        return $this->type;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function lexeme() : ?string {
-        return $this->lexeme;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString() : string {
-        return \sprintf('%s (%s)', $this->type, $this->lexeme);
-    }
 }
