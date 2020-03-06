@@ -256,7 +256,7 @@ final class TokenStream implements Tokenizer, Shifter {
             $token = $this->state->token($this, $this->buffer, $this->offset);
 
             if (!$token || 0 === ($bytes = \strlen($token->lexeme()))) {
-                throw $this->error('Unexpected token');
+                $this->error('Unexpected token');
             }
 
             // may need fixing later on...
